@@ -55,9 +55,9 @@ class App extends Component {
     }
   }
 
-  imageArray = () => {
+  imageArray = (startPoint, endPoint) => {
     let arr = [];
-    for (let i = 0; i < 5; i++)
+    for (let i = startPoint; i < endPoint; i++)
       arr.push(this.state.pokeInfo[i].sprites.back_default)
     return arr;
   }
@@ -70,10 +70,47 @@ class App extends Component {
       return 'text';
     }
   
-  giveDetails = () => {
+  giveDetails = (startPoint, endPoint) => {
     var rows = [];
-    for (var i = 0; i < 5; i++) {
-      rows.push(<img src='this.state.pokeInfo[i].sprites.back_default' alt={i + i + i} size='5%' key={'00'+i}/>);
+    let imgStyle = {
+
+    }
+    let style = {
+      display: 'flex',
+      justifyContent: 'center',
+      flexDirection: 'row',
+      border: '1px green solid',
+      padding: '10px',
+      margin: '10px',
+      boxShadow: '3px 3px black',
+      background: '#2D6BE5',
+      color: 'white',
+      flex: '1',
+      
+      
+    }
+    for (var i = startPoint; i < endPoint; i++) {
+      rows.push(<div style={style}>
+        <div>
+        <img src={this.imageArray(startPoint, endPoint)[i]} alt={i + i + i} width='300px' key={'00' + i} style={imgStyle}/>
+        </div>
+          {/* <hr/> */}
+        <div>
+        <Pokemons 
+          name={this.state.pokemons}
+          ability={this.state.pokeAbilities}
+          id={i}
+          image={this.imageArray()[i]}
+          base_experience={this.state.pokeInfo[i].base_experience}
+          height={this.state.pokeInfo[i].height}
+          // moves={this.state.pokeInfo[i].moves[i].move.name}
+          weight={this.state.pokeInfo[i].weight}
+          species={this.state.pokeInfo[i].species.name}/>
+        </div>
+        
+        </div>
+         );
+       
     }
     console.log(rows)
     return <div>{rows}</div>;
@@ -89,24 +126,26 @@ class App extends Component {
     // let imageArr = this.imageArr;
     // let someVar = '<img src={ this.state.pokeInfo[0].sprites.back_default }'
     
+    
+
     return (
       
       this.state.pokemons.length > 0 && this.state.pokeInfo.length > 0 ?
 
         (<Playground>
-
+{/* 
           <div>
 
-            <img src='https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/1.png'
+            {/* <img src='https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/1.png'
               style={{ width: '100%' }}/>
             <img 
               src={this.giveImage()}
               alt="eachpokemon"
-              style={{ width: '100%' }} />
+              style={{ width: '100%' }} /> 
             
-          </div>
+          </div> */}
         {console.log('pokeInfo from state: ', this.state.pokeInfo)}
-        <Pokemons 
+        {/* <Pokemons 
         name={this.state.pokemons} 
         ability={this.state.pokeAbilities} 
         id='0' image={this.state.pokeImages}/>
@@ -121,8 +160,11 @@ class App extends Component {
         <Pokemons 
         name={this.state.pokemons} 
         ability={this.state.pokeAbilities} 
-            id='3' />
-          {this.giveDetails()}
+            id='3' /> */}
+          {/* <div> */}
+          {this.giveDetails(0, 5)}
+          {this.giveDetails(5, 10)}
+          
           
         
           
